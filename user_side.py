@@ -18,7 +18,7 @@ def randomized_resopnse(bit_x, epsilon):
         return -bit_x
 
 def int_to_binary(value,length):
-    return format(value, '0'+str(length)+'b')
+    return format(int(value), '0'+str(length)+'b')
 
 def binary_to_int(value):
     return int(value, 2)
@@ -27,7 +27,7 @@ def binary_to_int(value):
 class user_Node:
     def __init__(self, index , value):
         self.index = index
-        self.value = value
+        self.value = int(value)
 
 
     def return_private_bits(self,Z_1,Z_2,number_of_bits, hash_fuction ,epsilon,partition_index):
@@ -35,7 +35,6 @@ class user_Node:
         binary_rep = int_to_binary(self.value,number_of_bits)
         first_bit = Z_1[binary_to_int(int_to_binary(hash_fuction[self.value],number_of_bits)+binary_rep[partition_index]), self.index]
         first_bit = randomized_resopnse(first_bit, epsilon/2)
-
         second_bit = Z_2[self.value, self.index]
         second_bit = randomized_resopnse(second_bit, epsilon/2)
         return (first_bit, second_bit)

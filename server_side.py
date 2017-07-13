@@ -7,6 +7,9 @@ from Crypto.Cipher import AES
 from Crypto import Random
 from user_side import  user_Node
 import bitstring
+from config import config
+import tabels
+
 
 def int_to_binary(number,length):
     return format(number, '0'+str(length)+'b')
@@ -25,6 +28,7 @@ def random_partition(users,numberOfsubsets):
 
 
 def createRandomMatrix(T,n):
+
     return np.random.choice([-1,1], size=(T,n))
 
 def create_random_Hash(T,users):
@@ -55,7 +59,13 @@ def create_random_Hash(T,users):
 
 
 
-
+def randomized_resopnse(bit_x, epsilon):
+    threshold = float(np.exp(epsilon)) / float(np.exp(epsilon) + 1)
+    # if the random float falls in the range [0, e^epsilon\e^epsilon)+1] return bit_x otherwise flip bit
+    if random.random() <= threshold:
+        return bit_x
+    else:
+        return -bit_x
 
 
 
@@ -95,9 +105,8 @@ def succinctHist(d, T, users,epsilon):
     n =len(users)
     private_bits = {}
     number_of_bits = int(math.log(d))
-    print number_of_bits
-
-
+    global Z_1
+    global Z_2
 
     partition = random_partition(n,number_of_bits)
     hash_function = create_random_Hash(100,users)
@@ -109,13 +118,15 @@ def succinctHist(d, T, users,epsilon):
     for l in range(0,number_of_bits):
         bits_1 = np.zeros(n)
         bits_2 = np.zeros(n)
+
         for i in partition[l]:
             Z_1 = createRandomMatrix(2*T,n)
-            (bit_1, bit_2) = users[i].return_private_bits(Z_1, Z_2, number_of_bits, hash_function, epsilon, l)
+            (bit_1, bit_2) = users[i].return_private_bits( number_of_bits, hash_function, epsilon, l)
             bits_1[i] = bit_1
             bits_2[i] = bit_2
-            binary_value = int_to_binary(users[i].value,number_of_bits)
-        bit_hash_value_estimate = float(np.exp(epsilon)+1) / float(np.exp(epsilon) - 1)*np.array(bits_1).dot(Z_1.transpose())
+            #binary_value = int_to_binary(users[i].value,number_of_bits)
+
+        bit_hash_value_estimate = float(np.exp(epsilon/2)+1) / float(np.exp(epsilon/2) - 1)*np.array(bits_1).dot(Z_1.transpose())
         for t in range(T):
             # decide on each of the bits with a majority vote
             zero_bit_count = bit_hash_value_estimate[binary_to_int(int_to_binary(t,number_of_bits)+'0')]
@@ -128,18 +139,38 @@ def succinctHist(d, T, users,epsilon):
     # estimate frequency for each of the suspected heavy hitters
     frequency ={}
     for value in heavy_hitters_suspects:
-        frequency[value] = bits_2.dot(Z_2[value,:])
+        frequency[value] = float(np.exp(epsilon/2)+1) / float(np.exp(epsilon/2) - 1)*bits_2.dot(Z_2[value,:])
     print frequency
+
+
+class user_Node:
+    def __init__(self, index , value):
+        self.index = index
+        self.value = int(value)
+
+
+    def return_private_bits(self,number_of_bits, hash_fuction ,epsilon,partition_index):
+        global Z_1
+        global Z_2
+        binary_rep = int_to_binary(self.value,number_of_bits)
+        first_bit = Z_1[binary_to_int(int_to_binary(hash_fuction[self.value],number_of_bits)+binary_rep[partition_index]), self.index]
+        first_bit = randomized_resopnse(first_bit, epsilon/2)
+        second_bit = Z_2[self.value, self.index]
+        second_bit = randomized_resopnse(second_bit, epsilon/2)
+        return (first_bit, second_bit)
+
+
+
     
 
 
-d = 1000000
-T=100
-epsilon =2.0
+d = 500000
+T=700
+epsilon = 2.0
 users = []
-for i in range(1000):
-    users.append(user_Node(i,random.randint(0,d-1)))
-
+data = lines = [line.rstrip('\n') for line in open('test.txt')]
+for i in range(len(data)):
+    users.append(user_Node(i,data[i]))
 succinctHist(d,T ,users,epsilon)
 
 
