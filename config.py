@@ -5,12 +5,12 @@ import numpy as np
 class config:
     @staticmethod
     def reinitializeParameters():
-        config.epsilon = 2.0  # Privacy parameter, to be set globally
+        config.epsilon = 2.0 # Privacy parameter, to be set globally
         config.cEpsilon = (math.exp(config.epsilon) + 1) / (math.exp(config.epsilon) - 1)  # Scaling for de-biasing
 
         config.d = 500000  # Domain size
         config.n = 500000  # Number of data samples, needed only for simulation
-
+        config.T = 1000    # Hash domain size
         #config.w = config.nearestPowerOfTwoCeil(math.sqrt(config.n))  # Sketch size
         #assert (int(math.log(config.w, 2)) <= 254), 'Sketch size (w) too large'
 

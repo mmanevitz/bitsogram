@@ -77,7 +77,7 @@ def frequency_oracle(value,user_values):
     frequency_estimate = 0
     for user_value in user_values:
         z = random.choice([1,-1])
-        if value == int(user_value) :
+        if value == user_value:
             frequency_estimate += config.cEpsilon*z*randomized_resopnse(z)
         else:
             frequency_estimate += config.cEpsilon*z
@@ -144,18 +144,18 @@ def invert_dict(d):
         d_inv[v].append(k)
     return d_inv
 
-def hash_test(users):
+def hash_test(users,heavy_hitters):
     hash_domain_sizes= [100, 200, 300, 400, 500, 600, 700, 800 , 900, 1000 ,1500,2000, 3000]
     max_collisions = []
     for T in hash_domain_sizes:
         print "hash domain size = %d" %T
         hash_func = create_random_Hash(T, users)
         inv_hash = invert_dict(hash_func)
-        for i in range(10):
+        for i in heavy_hitters:
             hash_value = hash_func[i]
             collisions = dict(Counter(hash_func.values()))
             total_number_collisions = len(inv_hash[hash_func[i]])
-            intersecrion_with_h_h = list(set(inv_hash[hash_func[i]]) & set(range(10))-set([i]))
+            intersecrion_with_h_h = list(set(inv_hash[hash_func[i]]) & set(heavy_hitters)-set([i]))
             print "value = %d, number of cllisions = %d, number_of_hh_collisions = %d"%(i,total_number_collisions, len(intersecrion_with_h_h))
 
 
@@ -168,53 +168,118 @@ def hash_test(users):
     plt.ylabel('number of collision')
     plt.show()
 
+def explicitHist(value_range, values):
+    frequency_dict = {}
+    for value in value_range:
+        frequency_dict[value] = frequency_oracle(value, values)
+    return frequency_dict
+
+def Hashtogram(d, T, R, users,user_values,epsilon):
+    n = len(users)
+    Partition = random_partition(n, R)
 
 
 
 
 
 
-def succinctHist(d, T, users, epsilon):
+
+def succinctHist(d, T, users,user_values,epsilon):
     n = len(users)
     private_bits = {}
-    number_of_bits = int(math.log(d))
+    number_of_bits = int(math.log(config.d))
     partition = random_partition(n, number_of_bits)
-    hash_function = create_random_Hash(T, users)
+    hash_function = create_random_Hash(config.T, users)
+    #print hash_function
+
+    hh_hash = [hash_function[value] for value in range(10)]
+    hh_hash_0 = [(value,0) for value in hh_hash]
+    hh_hash_1 = [(value,1) for value in hh_hash]
+    # heavy_hitters = np.zeros([T, number_of_bits], dtype=int)
+    heavy_hitters = np.zeros([len(hh_hash), number_of_bits], dtype=int)
+    for l in range(number_of_bits):
+        hash_bit_pairs = []
+        print"********************"
+        print "l=%d"%l
+        print "********************"
+        for i in partition[l]:
+            value = user_values [i]
+
+            binary_rep = int_to_binary(value, number_of_bits)
+            hash_bit_pairs.append((hash_function[value],int(binary_rep[l])))
+
+    #bit_hash_value_estimate = explicitHist(range(2*T),hash_bit_pairs)
+        bit_hash_value_estimate = explicitHist(hh_hash_0+ hh_hash_1, hash_bit_pairs)
+        print bit_hash_value_estimate
     # each row is the bit representation of a heavy_hitter
-    heavy_hitters = np.zeros([T, number_of_bits], dtype=int)
-    for l in range(0, number_of_bits):
-        bit_hash_value_estimate = {t:0 for t in range(2*T)}
-        for t in range(2*T):
-            for i in partition[l]:
-                binary_rep = int_to_binary(users[i].value, number_of_bits)
-                concatted_value = binary_to_int(int_to_binary(hash_function[users[i].value], number_of_bits) + binary_rep[l])
-                z = random.choice([1, -1])
-                if t == concatted_value:
-                    bit_hash_value_estimate[concatted_value] += z * randomized_resopnse(z,epsilon)
-                else:
-                    bit_hash_value_estimate[concatted_value] += z
-        for t in range(T):
+        #for t in range(T):
+        for i in range(len(hh_hash)):
+            t = hh_hash[i]
             # decide on each of the bits with a majority vote
-            zero_bit_count = bit_hash_value_estimate[binary_to_int(int_to_binary(t, number_of_bits) + '0')]
-            one_bit_count = bit_hash_value_estimate[binary_to_int(int_to_binary(t, number_of_bits) + '1')]
-            heavy_hitters[t, l] = 0 if zero_bit_count > one_bit_count else 1
+            zero_bit_count = bit_hash_value_estimate[(t,0)]
+            one_bit_count = bit_hash_value_estimate[(t,1)]
+            heavy_hitters[i, l] = 0 if zero_bit_count > one_bit_count else 1
     print heavy_hitters
 
     # convert from binary representation int list of int values
-    heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(T)]
-    print heavy_hitters_suspects
-    # estimate frequency for each of the suspected heavy hitters
-    frequency = {value:0 for value in heavy_hitters_suspects}
-    factor = float(np.exp(epsilon / 2) + 1) / float(np.exp(epsilon / 2) - 1)
-    for value in heavy_hitters_suspects:
-        for user in users:
-            z =random.choice([1,-1])
-            if value == user.value:
-                frequency[value] += factor*z* randomized_resopnse(z,epsilon)
-            else:
-                frequency[value] += factor * z
+    #heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(T)]
+    heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(len(hh_hash))]
+    #print heavy_hitters_suspects
 
+    # estimate frequency for each of the suspected heavy hitters
+    frequency = {}
+    for value in heavy_hitters_suspects:
+        # each row is the bit representation of a heavy_hitter
+        frequency[value] = frequency_oracle(value, user_values)
     print frequency
+
+
+
+
+
+
+# def succinctHist(d, T, users, epsilon):
+#     n = len(users)
+#     private_bits = {}
+#     number_of_bits = int(math.log(d))
+#     partition = random_partition(n, number_of_bits)
+#     hash_function = create_random_Hash(T, users)
+#     # each row is the bit representation of a heavy_hitter
+#     heavy_hitters = np.zeros([T, number_of_bits], dtype=int)
+#     for l in range(0, number_of_bits):
+#         bit_hash_value_estimate = {t:0 for t in range(2*T)}
+#         for t in range(2*T):
+#             for i in partition[l]:
+#                 frequency_oracle
+#                 binary_rep = int_to_binary(users[i].value, number_of_bits)
+#                 concatted_value = binary_to_int(int_to_binary(hash_function[users[i].value], number_of_bits) + binary_rep[l])
+#                 z = random.choice([1, -1])
+#                 if t == concatted_value:
+#                     bit_hash_value_estimate[concatted_value] += z * randomized_resopnse(z)
+#                 else:
+#                     bit_hash_value_estimate[concatted_value] += z
+#         for t in range(T):
+#             # decide on each of the bits with a majority vote
+#             zero_bit_count = bit_hash_value_estimate[binary_to_int(int_to_binary(t, number_of_bits) + '0')]
+#             one_bit_count = bit_hash_value_estimate[binary_to_int(int_to_binary(t, number_of_bits) + '1')]
+#             heavy_hitters[t, l] = 0 if zero_bit_count > one_bit_count else 1
+#     print heavy_hitters
+#
+#     # convert from binary representation int list of int values
+#     heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(T)]
+#     print heavy_hitters_suspects
+#     # estimate frequency for each of the suspected heavy hitters
+#     frequency = {value:0 for value in heavy_hitters_suspects}
+#     factor = float(np.exp(epsilon / 2) + 1) / float(np.exp(epsilon / 2) - 1)
+#     for value in heavy_hitters_suspects:
+#         for user in users:
+#             z =random.choice([1,-1])
+#             if value == user.value:
+#                 frequency[value] += factor*z* randomized_resopnse(z,epsilon)
+#             else:
+#                 frequency[value] += factor * z
+#
+#     print frequency
 
 
 class user_Node:
@@ -238,17 +303,18 @@ class user_Node:
 
 d = 500000
 T = 700
-epsilon = 2.0
+
 
 config.reinitializeParameters()
 users = []
-data = lines = [line.rstrip('\n') for line in open('test.txt')]
+data = lines = [int(line.rstrip('\n')) for line in open('test.txt')]
 for i in range(len(data)):
     users.append(user_Node(i, data[i]))
 
 #oracle_test(data)
-hash_test(users)
-#succinctHist(d, T, users, epsilon)
+#explicitHist(xrange(d), data)
+#hash_test(users,range(700))
+succinctHist(d, T, users,data, config.epsilon)
 
 
 
