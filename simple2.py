@@ -39,11 +39,13 @@ def createRandomMatrix(T, n):
 
 
 def create_random_Hash(T, d):
-    hash_function = {}
-    for value in range(d):
-        if value not in hash_function:
-            hash_function[value] = random.randint(1, T - 2)
-    return hash_function
+    seed = random.randint(0, 1000000)
+    return seed
+    # hash_function = {}
+    # for value in range(d):
+    #     if value not in hash_function:
+    #         hash_function[value] = random.randint(1, T - 2)
+    # return hash_function
 
 
 #
@@ -63,7 +65,9 @@ def create_random_Hash(T, d):
 #
 
 
-
+def hash_value(seed, value):
+    random.seed(seed+value)
+    return random.randint(1,T)
 
 
 
@@ -178,7 +182,7 @@ def explicitHist(value_range, values):
         frequency_dict[value] = frequency_oracle(value, values)
     return frequency_dict
 
-def Hashtogram(d, T,epsilon, R, users):
+def Hashtogram(d, T,epsilon, R, users, query_elements):
     n = len(users)
     a = np.zeros([T+1,R])
     Partition = random_partition(n, R)
@@ -199,8 +203,8 @@ def Hashtogram(d, T,epsilon, R, users):
 
     #print "a[%d,%d] =%f" %(t,partition_index,a[t,partition_index])
     counts = {}
-    for value in range(20):
-        vector =[a[(hashes[r])[value] ,r]for r in range(R)]
+    for value in query_elements:
+        vector =[a[hash_value(hashes[r],value) ,r]for r in range(R)]
         print vector
         counts[value] = R*np.median(vector)
 
@@ -280,9 +284,20 @@ class user_Node:
     # def set_hash_function(self,hash_function):
     #     self.hash_function = hash_function
 
-    def get_bit(self,hash_function):
-        self.hash_function = hash_function
-        t = T_bit_matrix[self.hash_function[self.value]]
+    def hash_value(self,seed, value):
+        random.seed(seed+value)
+        return random.randint(1,T+1)
+
+
+        # hash_function = {}
+        # for value in range(d):
+        #     if value not in hash_function:
+        #         hash_function[value] = random.randint(1, T - 2)
+        # return hash_function
+
+    def get_bit(self,hash_seed):
+        self.hash_seed = hash_seed
+        t = T_bit_matrix[hash_value(self.hash_seed ,self.value)]
         bit = np.inner(self.random_value,t)%2
         #translate from binary to +-1[
         bit = 1 if bit == 0 else -1
@@ -292,6 +307,54 @@ class user_Node:
         return self.random_value_int
     def get_random_value(self):
         return self.random_value
+
+
+def calculate_errors(real_count , result_count):
+    errors = []
+    for value in result_count:
+        errors.append(abs(result_count[value]-real_count[value]))
+    avg_error = np.mean(errors)
+    max_error = np.max(errors)
+    min_error = np.min(errors)
+    return (avg_error, max_error, min_error)
+
+
+
+
+
+def run_with_different_hash_domains(self,d, epsilon,R, users, real_count ,heavy_hitter_list):
+    domain_sizes = [200*i for i in range(1,20)]
+    all_avg_errors = []
+    all_max_errors = []
+    all_min_errors = []
+    hh_avg_errors = []
+    hh_max_errors = []
+    hh_min_errors = []
+
+    all_values = range(d)
+    for T in domain_sizes:
+        all_emperical_count = Hashtogram(d, T, config.epsilon, R, users,all_values)
+        hh_emperical_count = Hashtogram(d, T, config.epsilon, R, users, heavy_hitter_list)
+        (all_avg_error, all_max_error, all_min_error) = calculate_errors(real_count, all_emperical_count)
+        (hh_avg_error, hh_max_error, hh_min_error) = calculate_errors(real_count, hh_emperical_count)
+        all_avg_errors.append(all_avg_error)
+        all_max_errors.append(all_max_error)
+        all_min_errors.append(all_min_error)
+        hh_avg_errors.append(hh_avg_error)
+        hh_max_errors.append(hh_max_error)
+        hh_min_errors.append(hh_min_error)
+
+    plt.plot(domain_sizes,all_avg_error, label ="all_avg_error")
+    plt.plot(domain_sizes,all_max_error, label ="all_max_error")
+    plt.plot(domain_sizes,all_min_error, label = "all_min_error")
+    plt.plot(domain_sizes,hh_avg_error , label = "hh_avg_error")
+    plt.plot(domain_sizes,hh_max_error , label = "hh_max_error")
+    plt.plot(domain_sizes,hh_min_error , label = "hh_min_error")
+    plt.legend()
+    plt.show
+
+
+
 
 
 
@@ -318,7 +381,7 @@ for i in range(len(data)):
 #hash_test(users,range(700))
 #succinctHist(d, T, config.epsilon, users,data)
 R =20
-print Hashtogram(d, T,config.epsilon, R, users)
+print Hashtogram(d, T,config.epsilon, R, users, range(10))
 
 
 
