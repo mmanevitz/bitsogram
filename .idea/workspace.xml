@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="15076f7a-0b74-4249-b251-8d66504ee2a0" name="Default" comment="">
+    <list default="true" id="15076f7a-0b74-4249-b251-8d66504ee2a0" name="Default" comment="&quot;second commit&quot;">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/simple2.py" afterPath="$PROJECT_DIR$/simple2.py" />
     </list>
@@ -18,18 +18,6 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="user_side.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/user_side.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="850">
-              <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="test.txt" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.txt">
           <provider selected="true" editor-type-id="text-editor">
@@ -43,7 +31,7 @@
       <file leaf-file-name="server_side.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/server_side.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4100">
+            <state relative-caret-position="415">
               <caret line="173" column="1" lean-forward="false" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
               <folding>
                 <element signature="e#1#12#0" expanded="true" />
@@ -52,23 +40,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/simple.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="575">
-              <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="simple2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/simple2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="69" column="29" lean-forward="false" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+            <state relative-caret-position="499">
+              <caret line="431" column="0" lean-forward="true" selection-start-line="431" selection-start-column="0" selection-end-line="431" selection-end-column="0" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -76,24 +52,51 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="multiarray.py" pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/.PyCharmCE2017.1/system/python_stubs/1774042436/numpy/core/multiarray.py">
+      <file leaf-file-name="simple.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/simple.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="25">
-              <caret line="2234" column="18" lean-forward="false" selection-start-line="2234" selection-start-column="8" selection-end-line="2234" selection-end-column="18" />
+            <state relative-caret-position="201">
+              <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="different_hash_sizes_R=5_d=50000_epsilon=2_hh=10.png" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/different_hash_sizes_R=5_d=50000_epsilon=2_hh=10.png">
+          <provider selected="true" editor-type-id="images">
+            <state />
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="random hash function.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/random hash function.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="125">
+              <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="create random information file.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/create random information file.py">
+      <file leaf-file-name="_base.py" pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Continuum/Anaconda2/Lib/site-packages/matplotlib/axes/_base.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="142">
+              <caret line="384" column="0" lean-forward="false" selection-start-line="384" selection-start-column="0" selection-end-line="384" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="results_epsilon_2" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/results_epsilon_2">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -103,16 +106,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="270">
               <caret line="360" column="3" lean-forward="true" selection-start-line="25" selection-start-column="3" selection-end-line="360" selection-end-column="3" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="results_epsilon_2" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/results_epsilon_2">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
-              <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -157,14 +150,20 @@
       <find>users</find>
       <find>.value</find>
       <find>orac</find>
-      <find>create_random_Hash</find>
-      <find>user</find>
       <find>set_hash_function</find>
       <find>print</find>
       <find>frequency_oracle</find>
       <find>Hashtogram</find>
       <find>randomized_resopnse</find>
       <find>hashtogra</find>
+      <find>run_with_different_hash_domains</find>
+      <find>hashtogram</find>
+      <find>user</find>
+      <find>user_node</find>
+      <find>create_random_Hash</find>
+      <find>hash_value</find>
+      <find>random.seed</find>
+      <find>random</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -191,7 +190,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="width" value="1917" />
-    <option name="height" value="1030" />
+    <option name="height" value="1020" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -474,20 +473,19 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1917" height="1030" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="0" width="1917" height="1020" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13643835" sideWeight="0.49317408" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1528767" sideWeight="0.49317408" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29915562" sideWeight="0.20547946" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18803419" sideWeight="0.22136986" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293124" sideWeight="0.4978022" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19300362" sideWeight="0.6208219" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29915562" sideWeight="0.79452056" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19300362" sideWeight="0.61808217" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.47252747" sideWeight="0.7780822" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18817852" sideWeight="0.7852055" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18803419" sideWeight="0.77863014" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18528464" sideWeight="0.5068259" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45476478" sideWeight="0.8580822" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23287672" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.051869724" sideWeight="0.8476712" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Data View" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28438357" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -509,12 +507,12 @@
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/simple2.py</url>
-          <line>237</line>
+          <line>296</line>
           <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/simple2.py</url>
-          <line>206</line>
+          <line>215</line>
           <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
@@ -528,7 +526,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="44" />
+      <option name="time" value="52" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="PythonConfigurationType">
@@ -548,27 +546,29 @@
         <watch expression="(hashes[r])[value] " language="Python" />
         <watch expression="[a[(hashes[r])[value] ,r]for r in range(R)]" language="Python" />
         <watch expression="hashes[0]" language="Python" />
+        <watch expression="user.get_bit(hash_function)" language="Python" />
+        <watch expression="user.get_random_value_int(T)" language="Python" />
+        <watch expression="count_by_random_value[user.get_random_value_int(T)]" language="Python" />
+        <watch expression="len(count_by_random_value)" language="Python" />
+        <watch expression="user.get_random_value_int(T)" language="Python" />
+        <watch expression="a.shape" language="Python" />
+        <watch expression="user.get_random_value_int(T)" language="Python" />
+        <watch expression="user.get_random_value_int(T)" language="Python" />
+        <watch expression="count_by_random_value[user.get_random_value_int(T)]" language="Python" />
+        <watch expression="user.get_bit(hash_function)" language="Python" />
+        <watch expression="user.get_bit(hash_function)" language="Python" />
+        <watch expression="hash_value(self.hash_seed ,self.value)" language="Python" />
+        <watch expression="hash_value(self.hash_seed ,self.value)" language="Python" />
+        <watch expression="hash_value(self.hash_seed ,self.value,T)" language="Python" />
+        <watch expression="self.hash_value(self.hash_seed ,self.value,T)" language="Python" />
+        <watch expression="T" language="Python" />
+        <watch expression="self.T" language="Python" />
+        <watch expression="self.hash_value(self.hash_seed ,self.value)" language="Python" />
+        <watch expression="self.random_value_int" language="Python" />
       </configuration>
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/user_side.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="775">
-          <caret line="37" column="0" lean-forward="false" selection-start-line="37" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simulation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/random hash function.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -777,13 +777,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/random hash function.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/simulation.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -791,38 +784,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/results_epsilon_2">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/user_side.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="850">
           <caret line="40" column="0" lean-forward="false" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server_side.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4100">
-          <caret line="173" column="1" lean-forward="false" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
-          <folding>
-            <element signature="e#1#12#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/simple.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="575">
-          <caret line="28" column="33" lean-forward="false" selection-start-line="28" selection-start-column="33" selection-end-line="28" selection-end-column="33" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -873,10 +838,59 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Continuum/Anaconda2/Lib/site-packages/matplotlib/axes/_base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="142">
+          <caret line="384" column="0" lean-forward="false" selection-start-line="384" selection-start-column="0" selection-end-line="384" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/different_hash_sizes_R=5_d=50000_epsilon=2_hh=10.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/random hash function.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="125">
+          <caret line="9" column="51" lean-forward="false" selection-start-line="9" selection-start-column="51" selection-end-line="9" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server_side.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="415">
+          <caret line="173" column="1" lean-forward="false" selection-start-line="173" selection-start-column="1" selection-end-line="173" selection-end-column="1" />
+          <folding>
+            <element signature="e#1#12#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/results_epsilon_2">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/simple.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="201">
+          <caret line="30" column="19" lean-forward="true" selection-start-line="30" selection-start-column="19" selection-end-line="30" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/simple2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="69" column="29" lean-forward="false" selection-start-line="69" selection-start-column="29" selection-end-line="69" selection-end-column="29" />
+        <state relative-caret-position="499">
+          <caret line="431" column="0" lean-forward="true" selection-start-line="431" selection-start-column="0" selection-end-line="431" selection-end-column="0" />
           <folding>
             <element signature="e#0#11#0" expanded="true" />
           </folding>

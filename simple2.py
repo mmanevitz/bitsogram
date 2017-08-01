@@ -38,14 +38,16 @@ def createRandomMatrix(T, n):
     return np.random.choice([-1, 1], size=(T, n))
 
 
+# def create_random_Hash(T, d):
+#     seed = random.randint(0, 1000000)
+#     return seed
+
 def create_random_Hash(T, d):
-    seed = random.randint(0, 1000000)
-    return seed
-    # hash_function = {}
-    # for value in range(d):
-    #     if value not in hash_function:
-    #         hash_function[value] = random.randint(1, T - 2)
-    # return hash_function
+    hash_function = {}
+    for value in range(d):
+        if value not in hash_function:
+            hash_function[value] = random.randint(1, T - 2)
+    return hash_function
 
 
 #
@@ -65,9 +67,15 @@ def create_random_Hash(T, d):
 #
 
 
-def hash_value(seed, value):
-    random.seed(seed+value)
-    return random.randint(1,T)
+# def hash_value(seed, value,T):
+#     random.seed(seed+value)
+#     # reset seed to default
+#     hash_val = random.randint(1, T)
+#     random.seed()
+#     return hash_val
+
+def hash_value(hash_function, value,T):
+    return hash_function[value]
 
 
 
@@ -197,6 +205,7 @@ def Hashtogram(d, T,epsilon, R, users, query_elements):
             count_by_random_value[user.get_random_value_int(T)] += user.get_bit(hash_function)
         for t in range(1,T+1):
             for b in range(1,T+1):
+                #Z[t,b] = bit z for hash value t and column type b
                 z = np.inner(int_to_binary(b ,T.bit_length()),int_to_binary(t,T.bit_length()))%2
                 z = 1 if z == 0 else -1
                 a[t,partition_index] += config.cEpsilon*z* count_by_random_value[b]
@@ -204,12 +213,62 @@ def Hashtogram(d, T,epsilon, R, users, query_elements):
     #print "a[%d,%d] =%f" %(t,partition_index,a[t,partition_index])
     counts = {}
     for value in query_elements:
-        vector =[a[hash_value(hashes[r],value) ,r]for r in range(R)]
-        print vector
+        vector =[a[hash_value(hashes[r],value,T) ,r]for r in range(R)]
         counts[value] = R*np.median(vector)
-
     print counts
     return counts
+
+
+# def Bitsogram(d, T, R, epsilon, users,user_values):
+#     n = len(users)
+#     private_bits = {}
+#     number_of_bits = d.bit_length()
+#     partition = random_partition(n, number_of_bits*R)
+#     hash_functions = [create_random_Hash(T, users) for r in range(R)]
+#     #print hash_function
+#
+#     #hh_hash = [hash_function[value] for value in range(10)]
+#     #hh_hash_0 = [(value,0) for value in hh_hash]
+#     #hh_hash_1 = [(value,1) for value in hh_hash]
+#     # heavy_hitters = np.zeros([T, number_of_bits], dtype=int)
+#     #heavy_hitters = np.zeros([len(hh_hash), number_of_bits], dtype=int)
+#     for r in range(R):
+#         hash_function = hash_functions[r]
+#         for l in range(number_of_bits):
+#             hash_bit_pairs = []
+#             print"********************"
+#             print "l=%d"%l
+#             print "********************"
+#             partition_index = binary_to_int(int_to_binary(r, R.bit_length() + int_to_binary(l, number_of_bits.bit_length())))
+#             for i in partition[partition_index]:
+#                 value = user_values [i]
+#                 binary_rep = int_to_binary(value, number_of_bits)
+#                 hash_bit_pairs.append((hash_function[value],int(binary_rep[l])))
+#
+#     #bit_hash_value_estimate = explicitHist(range(2*T),hash_bit_pairs)
+#         bit_hash_value_estimate = explicitHist(hh_hash_0+ hh_hash_1, hash_bit_pairs)
+#         print bit_hash_value_estimate
+#     # each row is the bit representation of a heavy_hitter
+#         #for t in range(T):
+#         for i in range(len(hh_hash)):
+#             t = hh_hash[i]
+#             # decide on each of the bits with a majority vote
+#             zero_bit_count = bit_hash_value_estimate[(t,0)]
+#             one_bit_count = bit_hash_value_estimate[(t,1)]
+#             heavy_hitters[i, l] = 0 if zero_bit_count > one_bit_count else 1
+#     print heavy_hitters
+#
+#     # convert from binary representation int list of int values
+#     #heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(T)]
+#     heavy_hitters_suspects = [binary_to_int("".join(map(str, heavy_hitters[t, :]))) for t in range(len(hh_hash))]
+#     #print heavy_hitters_suspects
+#
+#     # estimate frequency for each of the suspected heavy hitters
+#     frequency = {}
+#     for value in heavy_hitters_suspects:
+#         # each row is the bit representation of a heavy_hitter
+#         frequency[value] = frequency_oracle(value, user_values)
+#     print frequency
 
 
 
@@ -240,7 +299,6 @@ def succinctHist(d, T,epsilon, users,user_values):
 
     #bit_hash_value_estimate = explicitHist(range(2*T),hash_bit_pairs)
         bit_hash_value_estimate = explicitHist(hh_hash_0+ hh_hash_1, hash_bit_pairs)
-        print bit_hash_value_estimate
     # each row is the bit representation of a heavy_hitter
         #for t in range(T):
         for i in range(len(hh_hash)):
@@ -272,21 +330,23 @@ def succinctHist(d, T,epsilon, users,user_values):
 
 class user_Node:
     def __init__(self, index, value):
-        global T_bit_matrix
         self.index = index
         self.value = int(value)
-        self.random_value_int = random.randint(1, T)
-        self.random_value = T_bit_matrix[self.random_value_int]
-        self.column = np.dot(T_bit_matrix, self.random_value)%2
 
-
+    #self.column = np.dot(T_bit_matrix, self.random_value) % 2
 
     # def set_hash_function(self,hash_function):
     #     self.hash_function = hash_function
 
-    def hash_value(self,seed, value):
-        random.seed(seed+value)
-        return random.randint(1,T+1)
+    # def hash_value(self,seed, value):
+    #     random.seed(seed+value)
+    #     hash_val= random.randint(1, self.T +1)
+    #     #reset seed to default
+    #     random.seed()
+    #     return hash_val
+
+    def hash_value(self,hash_function, value):
+        return hash_function[value]
 
 
         # hash_function = {}
@@ -295,16 +355,21 @@ class user_Node:
         #         hash_function[value] = random.randint(1, T - 2)
         # return hash_function
 
+
     def get_bit(self,hash_seed):
         self.hash_seed = hash_seed
-        t = T_bit_matrix[hash_value(self.hash_seed ,self.value)]
+        t = int_to_binary(self.hash_value(self.hash_seed ,self.value),self.T.bit_length())
         bit = np.inner(self.random_value,t)%2
         #translate from binary to +-1[
         bit = 1 if bit == 0 else -1
         return randomized_resopnse(bit)
 
     def get_random_value_int(self,T):
+        self.T = T
+        self.random_value_int = random.randint(1, T)
+        self.random_value = int_to_binary(self.random_value_int,T.bit_length())
         return self.random_value_int
+
     def get_random_value(self):
         return self.random_value
 
@@ -322,8 +387,8 @@ def calculate_errors(real_count , result_count):
 
 
 
-def run_with_different_hash_domains(self,d, epsilon,R, users, real_count ,heavy_hitter_list):
-    domain_sizes = [200*i for i in range(1,20)]
+def run_with_different_hash_domains(d, epsilon,R, users, real_count ,heavy_hitter_list):
+    domain_sizes = [200*i for i in range(2,10)]
     all_avg_errors = []
     all_max_errors = []
     all_min_errors = []
@@ -333,9 +398,11 @@ def run_with_different_hash_domains(self,d, epsilon,R, users, real_count ,heavy_
 
     all_values = range(d)
     for T in domain_sizes:
+        print
         all_emperical_count = Hashtogram(d, T, config.epsilon, R, users,all_values)
-        hh_emperical_count = Hashtogram(d, T, config.epsilon, R, users, heavy_hitter_list)
+        hh_emperical_count = {k: all_emperical_count[k] for k in range(10)}
         (all_avg_error, all_max_error, all_min_error) = calculate_errors(real_count, all_emperical_count)
+        print (all_avg_error, all_max_error, all_min_error)
         (hh_avg_error, hh_max_error, hh_min_error) = calculate_errors(real_count, hh_emperical_count)
         all_avg_errors.append(all_avg_error)
         all_max_errors.append(all_max_error)
@@ -343,15 +410,19 @@ def run_with_different_hash_domains(self,d, epsilon,R, users, real_count ,heavy_
         hh_avg_errors.append(hh_avg_error)
         hh_max_errors.append(hh_max_error)
         hh_min_errors.append(hh_min_error)
-
-    plt.plot(domain_sizes,all_avg_error, label ="all_avg_error")
-    plt.plot(domain_sizes,all_max_error, label ="all_max_error")
-    plt.plot(domain_sizes,all_min_error, label = "all_min_error")
-    plt.plot(domain_sizes,hh_avg_error , label = "hh_avg_error")
-    plt.plot(domain_sizes,hh_max_error , label = "hh_max_error")
-    plt.plot(domain_sizes,hh_min_error , label = "hh_min_error")
+    print all_avg_errors
+    plt.title("Error as function of Hash domain size")
+    plt.xlabel("Size of hash domain size")
+    plt.ylabel("Error size")
+    plt.plot(domain_sizes,all_avg_errors, label ="all_avg_error")
+    #plt.plot(domain_sizes,all_max_errors, label ="all_max_error")
+    #plt.plot(domain_sizes,all_min_errors, label = "all_min_error")
+    plt.plot(domain_sizes,hh_avg_errors , label = "hh_avg_error")
+    #plt.plot(domain_sizes,hh_max_errors , label = "hh_max_error")
+    #plt.plot(domain_sizes,hh_min_errors , label = "hh_min_error")
     plt.legend()
-    plt.show
+    plt.show()
+    plt.savefig("different_hash_sizes.png")
 
 
 
@@ -362,16 +433,12 @@ def run_with_different_hash_domains(self,d, epsilon,R, users, real_count ,heavy_
 
 
 
-
-d = 500000
-T = 700
 
 
 config.reinitializeParameters()
 users = []
 data = lines = [int(line.rstrip('\n')) for line in open('test.txt')]
-global T_bit_matrix
-T_bit_matrix = np.array([int_to_binary(t, T.bit_length()) for t in range(0, T+1)])
+real_count = Counter(data)
 for i in range(len(data)):
     users.append(user_Node(i, data[i]))
 
@@ -380,8 +447,10 @@ for i in range(len(data)):
 #explicitHist(xrange(d), data)
 #hash_test(users,range(700))
 #succinctHist(d, T, config.epsilon, users,data)
-R =20
-print Hashtogram(d, T,config.epsilon, R, users, range(10))
+R =5
+#print Hashtogram(500000, 700,config.epsilon, R, users, range(10))
+
+print run_with_different_hash_domains(500000, config.epsilon,R, users, real_count ,range(10))
 
 
 
